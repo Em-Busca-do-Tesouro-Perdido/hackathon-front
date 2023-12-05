@@ -1,6 +1,41 @@
-import Image from 'next/image'
+"use client";
+import { useEffect, useState } from 'react';
+import { Contract, utils } from 'ethers';
+import { useWallets } from '@/context/context';
+import TransferOrder from '@/contracts/TransferOrder.sol/TransferOrder.json';
 
 export default function Payment() {
+	const { provider, account } = useWallets();
+	const [contract, setContract] = useState<Contract | null>(null);
+	const [requests, setRequests] = useState<any[]>([]);
+	utils.parseEther('0.01');
+	
+	useEffect(() => {
+		if (!contract) getContract();
+	}, [contract, account]);
+
+	useEffect(() => {
+		if (contract) handlePayments();
+	}, [contract]);
+
+	const getContract = async () => {
+		if (!provider) return;
+		const contract = new Contract('0x91f90370e0D9D571390F8075F2951823ecAC50dD', TransferOrder.abi, provider);
+		setContract(contract);
+	}
+
+	const handlePayments = async () => {
+		if (!contract) return;
+		try {
+			const tx = await contract.readRequest(3);
+			console.log({ tx })
+			if (tx) setRequests(tx);
+		} catch (err) {
+			console.error('handlePayments');
+			console.error(err);
+		}
+	}
+
 	return (
 		<main className="flex min-h-screen w-full flex-col justify-items-start md:p-20 p-4 bg-white boxPretty">
 			<div className="flex flex-col mb-10">
@@ -32,7 +67,7 @@ export default function Payment() {
 								Valor
 							</div>
 							<div className="cell">
-								Transferência efetivada
+								Status
 							</div>
 						</div>
 

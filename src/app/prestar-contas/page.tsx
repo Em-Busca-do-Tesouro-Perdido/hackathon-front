@@ -2,18 +2,18 @@ import Image from 'next/image'
 
 const lista = [
 	{
-		"beneficiario": "15.023.914/0001-45 - MUNICIPIO DE ARAPUTANGA",
-		"emenda_parlamentar": "202340470009-NELSON BARBUDO",
-		"documento_habil": "2023NME000029800",
-		"valor": "R$ 1.000.000,00",
-		"transferencia": "Em Processo",
-		"aprovacao_fiscalizacao": 1,
-	},
-	{
 		"beneficiario": "06.554.026/0001-68 - MUNICIPIO DE ARRAIAL",
 		"emenda_parlamentar": "202337880010-ELMANO FÉRRER",
 		"documento_habil": "2023NME000029703",
 		"valor": "R$ 1.600.000,00",
+		"transferencia": "Em Processo",
+		"aprovacao_fiscalizacao": 1,
+	},
+	{
+		"beneficiario": "15.023.914/0001-45 - MUNICIPIO DE ARAPUTANGA",
+		"emenda_parlamentar": "202340470009-NELSON BARBUDO",
+		"documento_habil": "2023NME000029800",
+		"valor": "R$ 1.000.000,00",
 		"transferencia": "Em Processo",
 		"aprovacao_fiscalizacao": 1,
 	},
@@ -90,7 +90,7 @@ export default function PrestarContas() {
 								Valor
 							</div>
 							<div className="cell">
-								Transferência efetivada
+								Status
 							</div>
 							<div className="cell">
 								Aprovação da Fiscalização

@@ -2,7 +2,7 @@
 import './globals.scss'
 import { Inter } from 'next/font/google'
 import { useState } from 'react'
-import { ethers } from 'ethers'
+import { ethers, providers } from 'ethers'
 import Web3Modal from 'web3modal'
 import WalletConnectProvider from '@walletconnect/web3-provider'
 import { AccountContext } from '../context/context'
@@ -14,7 +14,8 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   /* create local state to save account information after signin */
-  const [account, setAccount] = useState<String>('');
+  const [account, setAccount] = useState<string>('');
+  const [provider, setProvider] = useState<providers.Web3Provider>({} as providers.Web3Provider);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const route = usePathname();
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       const provider = new ethers.providers.Web3Provider(connection)
       const accounts = await provider.listAccounts()
       setAccount(accounts[0])
+      setProvider(provider);
       localStorage.setItem('isWalletConnected', 'true');
     } catch (err) {
       console.log('error:', err)
@@ -132,7 +134,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               }
             </ul>
           </aside>
-          <AccountContext.Provider value={account}>
+          <AccountContext.Provider value={{ account, provider }}>
             {children}
           </AccountContext.Provider>
         </main>

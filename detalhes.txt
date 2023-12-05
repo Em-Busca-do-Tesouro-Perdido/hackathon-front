@@ -1,0 +1,13 @@
+Prestação de contas
+Araputanga pra baixo - 
+Arraial - 29/11/2023 - nao recebida
+__________
+
+informe de pagamento tem que aparecer tudo que estar em prestação de conta.
+__________
+
+Mudar o titulo do transferencia efetivada.
+__________
+
+Ajustar o stepper, colocar os nomes das etapas
+__________
